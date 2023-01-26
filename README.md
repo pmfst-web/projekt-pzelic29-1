@@ -1,5 +1,5 @@
 # Projektne faze
-- [ ] - Opis projekta
+- [ x ] - Opis projekta
 - [ ] - Početna struktura aplikacije
 - [ ] - Prototip
 - [ ] - Konzultacije
@@ -8,12 +8,13 @@
 
 # Opis projekta
 ## Kratki opis
-Ovdje ide opis projekta
+Ideja projekta je napraviti costPlanning aplikaciju kojom bi se pratili troškovi. Aplikacija bi sadržavala ekran za unos u kojem bi bio input za unos naziva troška i odabir kategorije kojoj trošak pripada. Glavni ekran bi sadržavao popis svih troškova i njihov iznos, te kategoriju kojoj pripadaju. U aplikaciji bi bilo moguće dodavati nove troškove, bridati postojeće, uređivati ih i dodavati u favorite. Dodatno bi bila prikazana statistika (pie chart) u kojem bi bile prikazane kategorije troškova u bojama i postotcima koliko zauzimaju ukupno troškova. 
 
 ## Popis funkcionalnosti
-1. a
-2. b
-3. c
+1. Unos novih troškova
+2. Brisanje postojećih troškova
+3. Editiranje postojećih troškova
+4. Prikaz statistike 
 
 
 ## UPUTE
