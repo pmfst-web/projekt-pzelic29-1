@@ -41,7 +41,7 @@ const ChartScreen = () => {
         {data.map((item, index) => (
           <View style={styles.legendItem} key={index}>
             <View style={[styles.legendColor, { backgroundColor: item.color }]} />
-            <Text style={styles.legendText}>{item.name} - {item.value}%</Text>
+            <Text style={styles.legendText}>{item.name} - {item.value}€</Text>
           </View>
         ))}
       </View>
