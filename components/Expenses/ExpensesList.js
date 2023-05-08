@@ -1,4 +1,4 @@
-import { FlatList } from "react-native-web";
+import { FlatList } from "react-native";
 import ExpenseItem from './ExpenseItem';
 
 function renderExpenseItem(itemData) {

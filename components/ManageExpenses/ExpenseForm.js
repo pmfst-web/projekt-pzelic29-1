@@ -20,6 +20,7 @@ function ExpenseForm({submitButtonLabel,onCancel, onSubmit, defaultValues}) {
       };
     });
   }
+  
   function submitHandler (){
     const expenseData ={
       amount: +inputValues.amount,
@@ -31,28 +32,29 @@ function ExpenseForm({submitButtonLabel,onCancel, onSubmit, defaultValues}) {
   }
 
   return (
-    <View style={styles.form}>
+    <View style={styles.container}>
       <Text style={styles.title}>Your Expense</Text>
-        <Input
-          style={styles.rowInput}
-          label="Amount"
-          textInputConfig={{
-            keyboardType: "decimal-pad",
-            onChangeText: inputChangedHandler.bind(this, "amount"),
-            value: inputValues.amount,
-          }}
-        />
-        <Input
-          style={styles.rowInput}
-          label="Date"
-          textInputConfig={{
-            placeholder: "YYYY-MM-DD",
-            maxLength: 10,
-            onChangeText: inputChangedHandler.bind(this, "date"),
-            value: inputValues.date,
-          }}
-        />
       <Input
+        style={styles.input}
+        label="Amount"
+        textInputConfig={{
+          keyboardType: "decimal-pad",
+          onChangeText: inputChangedHandler.bind(this, "amount"),
+          value: inputValues.amount,
+        }}
+      />
+      <Input
+        style={styles.input}
+        label="Date"
+        textInputConfig={{
+          placeholder: "YYYY-MM-DD",
+          maxLength: 10,
+          onChangeText: inputChangedHandler.bind(this, "date"),
+          value: inputValues.date,
+        }}
+      />
+      <Input
+        style={styles.input}
         label="Description"
         textInputConfig={{
           multiline: true,
@@ -62,7 +64,8 @@ function ExpenseForm({submitButtonLabel,onCancel, onSubmit, defaultValues}) {
           value: inputValues.description,
         }}
       />
-       <SelectedListComponent
+      <SelectedListComponent
+        style={styles.input}
         label="Category"
         category={inputValues.category}
         onSelectedChange={(category) => {
@@ -83,10 +86,13 @@ function ExpenseForm({submitButtonLabel,onCancel, onSubmit, defaultValues}) {
     </View>
   );
 }
+
 export default ExpenseForm;
+
 const styles = StyleSheet.create({
-  form: {
-    marginTop: 40,
+  container: {
+    flex: 1,
+    padding: 16,
   },
   title: {
     fontSize: 24,
@@ -95,20 +101,17 @@ const styles = StyleSheet.create({
     marginVertical: 24,
     textAlign: "center",
   },
-  inputsRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  rowInput: {
-    flex: 1,
+  input: {
+    marginBottom: 16,
   },
   buttons: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
+    marginTop: 32,
   },
   button: {
-    minWidth: 120,
+    flex: 1,
     marginHorizontal: 8,
   },
 });
