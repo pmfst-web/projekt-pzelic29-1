@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import AllExpenses from "./screens/AllExpenses";
 import ManageExpense from "./screens/ManageExpenses";
 import RecentExpenses from "./screens/RecentExpenses";
+import ExpensesByCategoryScreen from './screens/ExpensesByCategoryScreen'
 import ChartScreen from "./screens/ChartScreen";
 import ButtonIcon from "./components/UI/ButtonIcon";
 import ExpensesContextProvider from "./store/store";
@@ -49,6 +50,17 @@ function ExpensesOverview() {
           tabBarLabel: "All Expenses",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="card-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="ExpenseByCategory"
+        component={ExpensesByCategoryScreen}
+        options={{
+          title: "Expenses by Category",
+          tabBarLabel: "Category",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="pricetag-outline" size={size} color={color} />
           ),
         }}
       />
