@@ -6,18 +6,22 @@ import {
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import SelectedListComponent from "./SelectedListComponent";
 import Input from "./Input";
 import Button from "../UI/Button";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
   const [inputValues, setInputValues] = useState({
     amount: defaultValues ? defaultValues.amount.toString() : "",
-    date: defaultValues ? defaultValues.date.toISOString().slice(0, 10) : "",
+    date: defaultValues ? defaultValues.date : new Date(),
     description: defaultValues ? defaultValues.description : "",
     category: defaultValues ? defaultValues.category : "",
   });
+
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
   function inputChangedHandler(inputIdentifier, enteredValue) {
     setInputValues((curInputValues) => {
@@ -32,7 +36,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
     Keyboard.dismiss(); // dismiss the keyboard when the form is submitted
     const expenseData = {
       amount: +inputValues.amount,
-      date: new Date(inputValues.date),
+      date: inputValues.date,
       description: inputValues.description,
       category: inputValues.category,
     };
@@ -45,6 +49,22 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
       return;
     }
     onSubmit(expenseData);
+  }
+
+  function showDatePicker() {
+    setIsDatePickerVisible(true);
+  }
+
+  function hideDatePicker() {
+    setIsDatePickerVisible(false);
+  }
+
+  function handleDateConfirm(date) {
+    hideDatePicker();
+    setInputValues((prevState) => ({
+      ...prevState,
+      date: date,
+    }));
   }
 
   return (
@@ -60,15 +80,23 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
             value: inputValues.amount,
           }}
         />
-        <Input
-          style={styles.input}
-          label="Date"
-          textInputConfig={{
-            placeholder: "YYYY-MM-DD",
-            maxLength: 10,
-            onChangeText: inputChangedHandler.bind(this, "date"),
-            value: inputValues.date,
-          }}
+        <TouchableOpacity onPress={showDatePicker}>
+          <Input
+            style={styles.input}
+            label="Date"
+            textInputConfig={{
+              editable: false,
+              value: inputValues.date.toLocaleDateString(),
+            }}
+          />
+        </TouchableOpacity>
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          date={inputValues.date}
+          maximumDate={new Date()}
+          onConfirm={handleDateConfirm}
+          onCancel={hideDatePicker}
         />
         <Input
           style={styles.input}
