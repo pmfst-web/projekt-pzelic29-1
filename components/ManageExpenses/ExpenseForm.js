@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { StyleSheet, Text, View, Alert } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from "react-native";
 import SelectedListComponent from "./SelectedListComponent";
 import Input from "./Input";
 import Button from "../UI/Button";
 
-function ExpenseForm({submitButtonLabel,onCancel, onSubmit, defaultValues}) {
+function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
   const [inputValues, setInputValues] = useState({
     amount: defaultValues ? defaultValues.amount.toString() : "",
-    date: defaultValues ? defaultValues.date.toISOString().slice(0,10) : "",
+    date: defaultValues ? defaultValues.date.toISOString().slice(0, 10) : "",
     description: defaultValues ? defaultValues.description : "",
     category: defaultValues ? defaultValues.category : "",
   });
@@ -20,79 +27,79 @@ function ExpenseForm({submitButtonLabel,onCancel, onSubmit, defaultValues}) {
       };
     });
   }
-  
-  function submitHandler (){
-    const expenseData ={
+
+  function submitHandler() {
+    Keyboard.dismiss(); // dismiss the keyboard when the form is submitted
+    const expenseData = {
       amount: +inputValues.amount,
       date: new Date(inputValues.date),
       description: inputValues.description,
       category: inputValues.category,
     };
     const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
-    const dateIsValid = expenseData.date.toString() !== 'Invalid date';
+    const dateIsValid = expenseData.date.toString() !== "Invalid date";
     const descriptionIsValid = expenseData.description.trim().length > 0;
-    const categoryIsValid=expenseData.category !== "";
-    if (!amountIsValid || !dateIsValid || !descriptionIsValid ||!categoryIsValid) {
-      Alert.alert('Invalid input', 'Please check your input values');
+    const categoryIsValid = expenseData.category !== "";
+    if (!amountIsValid || !dateIsValid || !descriptionIsValid || !categoryIsValid) {
+      Alert.alert("Invalid input", "Please check your input values");
       return;
     }
-    onSubmit(expenseData)
-    onSubmit(expenseData)
+    onSubmit(expenseData);
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Your Expense</Text>
-      <Input
-        style={styles.input}
-        label="Amount"
-        textInputConfig={{
-          keyboardType: "decimal-pad",
-          onChangeText: inputChangedHandler.bind(this, "amount"),
-          value: inputValues.amount,
-        }}
-      />
-      <Input
-        style={styles.input}
-        label="Date"
-        textInputConfig={{
-          placeholder: "YYYY-MM-DD",
-          maxLength: 10,
-          onChangeText: inputChangedHandler.bind(this, "date"),
-          value: inputValues.date,
-        }}
-      />
-      <Input
-        style={styles.input}
-        label="Description"
-        textInputConfig={{
-          multiline: true,
-          // autoCapitalize: 'none'
-          // autoCorrect: false // default is true
-          onChangeText: inputChangedHandler.bind(this, "description"),
-          value: inputValues.description,
-        }}
-      />
-      <SelectedListComponent
-        style={styles.input}
-        label="Category"
-        category={inputValues.category}
-        onSelectedChange={(category) => {
-          setInputValues((prevState) => ({
-            ...prevState,
-            category: category,
-          }));
-        }}
-      />
-      <View style={styles.buttons}>
-        <Button style={styles.button} mode="flat" onPress={onCancel}>
-          Cancel
-        </Button>
-        <Button style={styles.button} onPress={submitHandler}>
-          {submitButtonLabel}
-        </Button>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Your Expense</Text>
+        <Input
+          style={styles.input}
+          label="Amount"
+          textInputConfig={{
+            keyboardType: "decimal-pad",
+            onChangeText: inputChangedHandler.bind(this, "amount"),
+            value: inputValues.amount,
+          }}
+        />
+        <Input
+          style={styles.input}
+          label="Date"
+          textInputConfig={{
+            placeholder: "YYYY-MM-DD",
+            maxLength: 10,
+            onChangeText: inputChangedHandler.bind(this, "date"),
+            value: inputValues.date,
+          }}
+        />
+        <Input
+          style={styles.input}
+          label="Description"
+          textInputConfig={{
+            multiline: true,
+            onChangeText: inputChangedHandler.bind(this, "description"),
+            value: inputValues.description,
+          }}
+        />
+        <SelectedListComponent
+          style={styles.input}
+          label="Category"
+          category={inputValues.category}
+          onSelectedChange={(category) => {
+            setInputValues((prevState) => ({
+              ...prevState,
+              category: category,
+            }));
+          }}
+        />
+        <View style={styles.buttons}>
+          <Button style={styles.button} mode="flat" onPress={onCancel}>
+            Cancel
+          </Button>
+          <Button style={styles.button} onPress={submitHandler}>
+            {submitButtonLabel}
+          </Button>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
