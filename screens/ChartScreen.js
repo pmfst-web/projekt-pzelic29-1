@@ -35,6 +35,22 @@ function ChartScreen() {
 
   return (
     <View style={styles.container}>
+      <View>
+        <PieChart
+          data={data}
+          width={300}
+          height={300}
+          chartConfig={{
+            backgroundGradientFrom: "#1E2923",
+            backgroundGradientTo: "#08130D",
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          }}
+          hasLegend={false}
+          accessor={"value"}
+          backgroundColor={"transpparent"}
+        />
+      </View>
       <TouchableOpacity
         style={styles.button}
         onPress={() => setDisplayPercentage(!displayPercentage)}
@@ -43,22 +59,6 @@ function ChartScreen() {
           {displayPercentage ? "Amount" : "Percentage"}
         </Text>
       </TouchableOpacity>
-      <PieChart
-        data={data}
-        width={300}
-        height={300}
-        chartConfig={{
-          backgroundGradientFrom: "#1E2923",
-          backgroundGradientTo: "#08130D",
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        }}
-        hasLegend={false}
-        accessor={"value"}
-        backgroundColor={"transparent"}
-        paddingLeft={"15"}
-        center={[10, 10]}
-      />
       <View style={styles.legendContainer}>
         <Text style={styles.legendTitle}>Legend</Text>
         {data.map((item, index) => (
@@ -79,40 +79,39 @@ function ChartScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
     backgroundColor: "#80ced6",
   },
   button: {
-    backgroundColor: '#0066CC',
+    backgroundColor: "#0066CC",
     padding: 10,
     borderRadius: 5,
     marginVertical: 20,
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   legendContainer: {
     marginTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderRadius: 5,
-    shadowColor: '#000000',
+    shadowColor: "#000000",
     shadowOpacity: 0.2,
     shadowRadius: 5,
     shadowOffset: { width: 0, height: 2 },
   },
   legendTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   legendItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 5,
   },
   legendColor: {
