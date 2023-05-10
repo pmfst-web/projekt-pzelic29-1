@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { PieChart } from "react-native-chart-kit";
-import { ExpensesContext } from "../store/store";
+import { ExpensesContext } from "../../store/store";
 
 function ChartScreen() {
   const { expenses } = useContext(ExpensesContext);

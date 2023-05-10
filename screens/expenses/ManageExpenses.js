@@ -1,9 +1,8 @@
 import { useLayoutEffect, useContext } from "react";
 import { View, StyleSheet } from "react-native";
-import ExpenseForm from "../components/ManageExpenses/ExpenseForm";
-import ButtonIcon from "../components/UI/ButtonIcon";
-import Button from "../components/UI/Button";
-import { ExpensesContext } from "../store/store";
+import ExpenseForm from "../../components/ManageExpenses/ExpenseForm";
+import ButtonIcon from "../../components/UI/ButtonIcon";
+import { ExpensesContext } from "../../store/store";
 
 
 function getCategory(expenseId, expenses) {

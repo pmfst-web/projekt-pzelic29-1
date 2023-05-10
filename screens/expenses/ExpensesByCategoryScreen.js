@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { FlatList,View, Text, StyleSheet } from 'react-native';
-import { ExpensesContext } from '../store/store';
-import ExpenseItem from '../components/Expenses/ExpenseItem';
-import SelectedListComponent from '../components/ManageExpenses/SelectedListComponent';
+import { ExpensesContext } from '../../store/store';
+import ExpenseItem from '../../components/Expenses/ExpenseItem';
+import SelectedListComponent from '../../components/ManageExpenses/SelectedListComponent';
 
 function ExpensesByCategoryScreen() {
   const { expenses } = useContext(ExpensesContext);

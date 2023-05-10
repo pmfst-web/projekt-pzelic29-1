@@ -4,11 +4,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import AllExpenses from './screens/AllExpenses';
-import ManageExpense from './screens/ManageExpenses';
-import RecentExpenses from './screens/RecentExpenses';
-import ExpensesByCategoryScreen from './screens/ExpensesByCategoryScreen';
-import ChartScreen from './screens/ChartScreen';
+import AllExpenses from './screens/expenses/AllExpenses';
+import ManageExpense from './screens/expenses/ManageExpenses';
+import RecentExpenses from './screens/expenses/RecentExpenses';
+import ExpensesByCategoryScreen from './screens/expenses/ExpensesByCategoryScreen';
+import ChartScreen from './screens/expenses/ChartScreen';
 import ButtonIcon from './components/UI/ButtonIcon';
 import ExpensesContextProvider from './store/store';
 import LoginScreen from './screens/user/LoginScreen';
@@ -45,17 +45,6 @@ function ExpensesOverview() {
       <BottomTabs.Screen
         name="AllExpenses"
         component={AllExpenses}
-        options={{
-          title: 'All Expenses',
-          tabBarLabel: 'All Expenses',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="card-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <BottomTabs.Screen
-        name="LoginScreen"
-        component={LoginScreen}
         options={{
           title: 'All Expenses',
           tabBarLabel: 'All Expenses',
