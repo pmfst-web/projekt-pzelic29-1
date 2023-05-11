@@ -66,7 +66,7 @@ const LoginScreen = ({ navigation }) => {
           onChangeText={(text) => handleInputChange('password', text)}
         />
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Expense tracker app!</Text>
         </TouchableOpacity>
       </View>
     </View>
