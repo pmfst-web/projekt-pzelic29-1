@@ -6,28 +6,50 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  Alert
+  Alert,
 } from 'react-native';
 
 const backgroundImage = require('../../assets/expenses-1.jpg');
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    userName: '',
+    email: '',
+    password: ''
+  });
+
+  const handleInputChange = (name, value) => {
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
 
   const handleLogin = () => {
-    if (email === 'pzelic@pmfst.hr' && password === '123456') {
-      navigation.navigate('ExpensesOverview');
+    // Check if input is a valid email address
+    const isEmail = /\S+@\S+\.\S+/.test(formData.email);
+    if (
+      (isEmail && formData.email === 'pzelic@pmfst.hr') ||
+      (!isEmail && formData.userName === 'pzelic')
+    ) {
+      if (formData.password === '123456') {
+        navigation.navigate('ExpensesOverview', { userName: formData.userName });
+      } else {
+        Alert.alert('Invalid login', 'Incorrect password');
+      }
     } else {
-      Alert.alert("Invalid login", "Please check your input values");
-      return;
+      Alert.alert('Invalid login', 'Please check your input values');
     }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.square}>
-        <Image source={backgroundImage} style={styles.image} resizeMode="cover" />
+        <Image
+          source={backgroundImage}
+          style={styles.image}
+          resizeMode="cover"
+        />
       </View>
       <View style={styles.form}>
         <Text style={styles.title}>Login</Text>
@@ -35,13 +57,13 @@ const LoginScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Email"
           keyboardType="email-address"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => handleInputChange('email', text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text) => handleInputChange('password', text)}
         />
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
@@ -67,14 +89,14 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
-form: {
-  flex: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
-  position: 'absolute',
-  width: '100%',
-  height: '100%',
-},
+  form: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',

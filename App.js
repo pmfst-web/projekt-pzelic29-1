@@ -1,8 +1,11 @@
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation, useRoute} from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
 
 import AllExpenses from './screens/expenses/AllExpenses';
 import ManageExpense from './screens/expenses/ManageExpenses';
@@ -12,11 +15,14 @@ import ChartScreen from './screens/expenses/ChartScreen';
 import ButtonIcon from './components/UI/ButtonIcon';
 import ExpensesContextProvider from './store/store';
 import LoginScreen from './screens/user/LoginScreen';
+import SignOutScreen from './screens/user/SignOutScreen';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
-function ExpensesOverview() {
+function ExpensesOverview({userName}) {
+  const route = useRoute();
+  const navigation = route.params.navigation;
   return (
     <BottomTabs.Navigator
       screenOptions={({ navigation }) => ({
@@ -30,7 +36,18 @@ function ExpensesOverview() {
             }}
           />
         ),
-      })}>
+        headerLeft: () => (
+          <ButtonIcon
+            icon="log-out-outline"
+            size={24}
+            color="black"
+            onPress={() => {
+              navigation.navigate('SignOut', { userName: userName });
+            }}
+          />
+        ),
+      })}
+    >
       <BottomTabs.Screen
         name="RecentExpenses"
         component={RecentExpenses}
@@ -79,7 +96,7 @@ function ExpensesOverview() {
   );
 }
 
-export default function App() {
+export default function App({navigation}) {
   return (
     <>
       <StatusBar style="auto" />
@@ -95,12 +112,15 @@ export default function App() {
               name="ExpensesOverview"
               component={ExpensesOverview}
               options={{ headerShown: false }}
+              // Pass the navigation prop to ExpensesOverview component
+              initialParams={{ navigation: navigation }}
             />
             <Stack.Screen name="ManageExpense" component={ManageExpense} />
-            <Stack.Screen name="ChartScreen" component={ChartScreen} />
+            <Stack.Screen name="SignOut" component={SignOutScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </ExpensesContextProvider>
     </>
   );
 }
+
