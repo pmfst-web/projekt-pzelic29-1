@@ -33,3 +33,8 @@ Promijenjen izgled login zaslona. Dodan signoutscreen i logika za odjavu. Botun 
 ### Kratki opis promjena
 Uočena greška na Login zaslonu. Naslov iz login ispravljen da prikazuje naziv aplikacije.
 
+
+## 10.05.2023.
+### Kratki opis promjena
+Uočena greška na Login zaslonu. Naslov iz login ispravljen da prikazuje naziv aplikacije. Promijenjena struktura aplikacije tako da je komponenta za prikaz logike zaslona ExpensesOverview.js prebačena u mapu screens. Pročišćena App.js datoteka.
+
