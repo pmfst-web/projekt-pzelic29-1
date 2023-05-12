@@ -117,6 +117,7 @@ export default function App({navigation}) {
             />
             <Stack.Screen name="ManageExpense" component={ManageExpense} />
             <Stack.Screen name="SignOut" component={SignOutScreen} />
+            <Stack.Screen name="ChartScreen" component={ChartScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </ExpensesContextProvider>
