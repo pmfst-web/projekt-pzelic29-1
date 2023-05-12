@@ -29,9 +29,7 @@ const LoginScreen = ({ navigation }) => {
     // Check if input is a valid email address
     const isEmail = /\S+@\S+\.\S+/.test(formData.email);
     if (
-      (isEmail && formData.email === 'pzelic@pmfst.hr') ||
-      (!isEmail && formData.userName === 'pzelic')
-    ) {
+      (isEmail && formData.email === 'pzelic@pmfst.hr')) {
       if (formData.password === '123456') {
         navigation.navigate('ExpensesOverview', { userName: formData.userName });
       } else {
@@ -52,7 +50,7 @@ const LoginScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.form}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Expense tracker app!</Text>
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -66,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
           onChangeText={(text) => handleInputChange('password', text)}
         />
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Expense tracker app!</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
     </View>
